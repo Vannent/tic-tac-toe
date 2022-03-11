@@ -67,10 +67,15 @@ main {
     transition: transform 330ms ease-in-out;
 }
 
-div #choice {
-    font-size: 12em;
+div #box {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 13.5em;
     text-align: center;
     margin-top: 10px;
+    color: #60caa2;
+    text-shadow: 1px 1px 5px #3d3d3d11;
 }
 
 button {
