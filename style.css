@@ -46,7 +46,7 @@ main {
     padding-top: 0px;
 }
 
-.tables {
+#tables {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -54,7 +54,7 @@ main {
     padding-bottom: 15px;
 }
 
-.tables .box {
+#tables #box {
     background-color: #e0dfdf;
     height: 200px;
     width: 200px;
@@ -62,7 +62,7 @@ main {
     box-shadow: 1px 1px 2px #3d3d3d2a;
 }
 
-.tables .box:hover {
+#tables #box:hover {
     transform: scale(1.05);
     transition: transform 330ms ease-in-out;
 }
