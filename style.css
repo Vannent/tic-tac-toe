@@ -1,0 +1,95 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F7F7F7;
+    color: #3d3d3d;
+}
+
+header {
+    height: 5vh;
+
+    padding: 0px;
+    margin: 10px;
+    margin-bottom: 0px;
+}
+
+header .title {
+    margin: 0px;
+    padding: 0px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 3px;
+    color: #75EDBF;
+    text-shadow: 1px 1px 5px #3d3d3d11;
+}
+
+header .title:hover {
+    transform: scale(1.05);
+    transition: transform 330ms ease-in-out;
+}
+
+main {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0px;
+}
+
+.tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    padding-bottom: 15px;
+}
+
+.tables .box {
+    background-color: #e0dfdf;
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px #3d3d3d2a;
+}
+
+.tables .box:hover {
+    transform: scale(1.05);
+    transition: transform 330ms ease-in-out;
+}
+
+div #choice {
+    font-size: 12em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+button {
+    width: 150px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 0.8em;
+    border-radius: 20px;
+    border-style: none;
+    background-color: #92EDCA;
+    color: #3d3d3d;
+    box-shadow: 1px 1px 2px #3d3d3d2a;
+}
+
+button:hover {
+    transform: scale(1.1);
+    transition: transform 330ms ease-in-out;
+}
+
+footer {
+    font-weight: 600;
+}
