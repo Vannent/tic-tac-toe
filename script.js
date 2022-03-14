@@ -29,10 +29,9 @@
 
         },
         addPlayerChoice: function(e) {
-            if (this.choiceCheck == true) return 
-            else {
-                this.handleChoice(e.target.id, this.human);
-            }
+            if (this.choiceCheck == true) return;
+            // if (!this.CheckTie()) this.handleChoice(this.addComputerChoice(), this.computer);
+            else this.handleChoice(e.target.id, this.human);
         },
         addComputerChoice: function() {
         },
@@ -53,6 +52,9 @@
                 }
             }
             return gameWon;
+        },
+        CheckTie: function() {
+            this.gameend.style.display = "flex";
         },
         gameOver: function(gameWon) {
             for (let index of this.winConditions[gameWon.index]) {
