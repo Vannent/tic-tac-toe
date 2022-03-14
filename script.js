@@ -3,6 +3,7 @@
     var gameBoard = {
         playerChoice: [],
         computerChoice: [],
+        choice: false,
         init: function() {
             this.cacheDOM();
             this.bindEvents();
@@ -21,28 +22,29 @@
 
         },
         addPlayerChoice: function(e) {
-            if (e.innerHTML === "") {
+            if (e.innerHTML === "" && this.choice == false) {
                 e.innerHTML += "X";
+                this.choice = true;
+                // addComputerChoice();
+            } else if (e.innerHTML === "" && this.choice == true) {
+                e.innerHTML += "O";
+                this.choice = false;
             } else {
                 console.log("not empty")
             }
         },
-        addComputerChoice: function() {s
+        addComputerChoice: function() {
 
         },
         announceWinner: function() {
 
         },
         restartGame: function() {
-            this.boxStatus.innerHTML = "";
         },
     };
     gameBoard.init();
 })();
 
-// document.querySelector("#tables").addEventListener("click", (e) => {
-//     console.log(e.target)
-// })
 
 // PLAYERS ARE STORED AS OBJECTS
 
