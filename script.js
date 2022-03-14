@@ -1,45 +1,50 @@
 
 (function() {
     var gameBoard = {
-        playerChoice: [],
-        computerChoice: [],
-        choice: false,
+        board: [],
+        human: "X",
+        computer: "O",
+        winConditions: [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
+            [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]
+        ],
+        choices: Array.from(Array(9).keys()),
+        choiceCheck: false,
         init: function() {
             this.cacheDOM();
             this.bindEvents();
             this.render();
         },
         cacheDOM: function() {
-            this.boxStatus = document.getElementById("box");
-            this.table = document.querySelector("#tables");
             this.restartButton = document.querySelector("button");
+            this.cells = document.querySelectorAll(".cell");
+            this.gameend = document.querySelector(".endgame");
         },
         bindEvents: function() {
-            this.table.addEventListener("click", (e) => this.addPlayerChoice(e.target));
             this.restartButton.addEventListener("click", (e) => this.restartGame());
+            for (let i = 0; i < this.cells.length; i++) {
+                this.cells[i].addEventListener("click", this.addPlayerChoice.bind(this), false);
+            };
         },
         render: function() {
 
         },
         addPlayerChoice: function(e) {
-            if (e.innerHTML === "" && this.choice == false) {
-                e.innerHTML += "X";
-                this.choice = true;
-                // addComputerChoice();
-            } else if (e.innerHTML === "" && this.choice == true) {
-                e.innerHTML += "O";
-                this.choice = false;
-            } else {
-                console.log("not empty")
-            }
+            this.handleChoice(e.target.id, this.human);
         },
         addComputerChoice: function() {
-
+        },
+        handleChoice: function(eId, player) {
+            this.board[eId] = player;
+            this.cell = document.getElementById(eId).innerHTML = player;
         },
         announceWinner: function() {
-
+            this.gameend.style.display = "flex";
         },
         restartGame: function() {
+            for (let i = 0; i < this.cells.length; i++) {
+                this.cells[i].innerHTML = "";
+            };
         },
     };
     gameBoard.init();
