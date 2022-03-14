@@ -12,7 +12,6 @@ body {
 
 header {
     height: 5vh;
-
     padding: 0px;
     margin: 10px;
     margin-bottom: 0px;
@@ -46,36 +45,27 @@ main {
     padding-top: 0px;
 }
 
-#tables {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
-    padding-bottom: 15px;
+table {
+    border-spacing: 5px;
+    margin-bottom: 15px;
 }
 
-#tables #box {
+td {
     background-color: #e0dfdf;
     height: 200px;
     width: 200px;
     border-radius: 10px;
     box-shadow: 1px 1px 2px #3d3d3d2a;
-}
-
-#tables #box:hover {
-    transform: scale(1.05);
-    transition: transform 330ms ease-in-out;
-}
-
-div #box {
-    display: flex;
-    justify-content: center;
-    align-self: center;
     font-size: 13.5em;
     text-align: center;
-    margin-top: 10px;
     color: #60caa2;
     text-shadow: 1px 1px 5px #3d3d3d11;
+    cursor: pointer;
+}
+
+td:hover {
+    transform: scale(1.05);
+    transition: transform 330ms ease-in-out;
 }
 
 button {
@@ -93,6 +83,20 @@ button {
 button:hover {
     transform: scale(1.1);
     transition: transform 330ms ease-in-out;
+}
+
+.endgame {
+    display: none;
+    text-align: center;
+    background-color: #75EDBF;
+    border-radius: 25px;
+    height: 200px;
+    width: 350px;
+    padding: 10px 20px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 footer {
