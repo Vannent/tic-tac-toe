@@ -8,7 +8,6 @@
             [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
             [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]
         ],
-        choices: Array.from(Array(9).keys()),
         choiceCheck: false,
         init: function() {
             this.cacheDOM();
@@ -30,21 +29,48 @@
 
         },
         addPlayerChoice: function(e) {
-            this.handleChoice(e.target.id, this.human);
+            if (this.choiceCheck == true) return 
+            else {
+                this.handleChoice(e.target.id, this.human);
+            }
         },
         addComputerChoice: function() {
         },
         handleChoice: function(eId, player) {
             this.board[eId] = player;
             this.cell = document.getElementById(eId).innerHTML = player;
+            let gameWon = this.checkWin(this.board, player);
+            if (gameWon) this.gameOver(gameWon);
+        },
+        checkWin: function(board, player) {
+            let plays = board.reduce((a, e , i) => 
+                (e === player) ? a.concat(i) : a, []);
+            let gameWon = null;
+            for (let [index, win] of this.winConditions.entries()) {
+                if (win.every(elem => plays.indexOf(elem) > -1)) {
+                    gameWon = {index: index, player: player};
+                    break;
+                }
+            }
+            return gameWon;
+        },
+        gameOver: function(gameWon) {
+            for (let index of this.winConditions[gameWon.index]) {
+                document.getElementById(index).style.color =
+                gameWon.player == this.human ? "#75EDBF" : "#ed9175";
+                this.choiceCheck = true;
+            }
         },
         announceWinner: function() {
             this.gameend.style.display = "flex";
         },
         restartGame: function() {
+            this.board = Array.from(Array(9).keys());
             for (let i = 0; i < this.cells.length; i++) {
                 this.cells[i].innerHTML = "";
+                this.cells[i].style.removeProperty("color");
             };
+            this.choiceCheck = false;
         },
     };
     gameBoard.init();
