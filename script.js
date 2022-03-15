@@ -26,14 +26,17 @@
             };
         },
         render: function() {
-
+            this.board = Array.from(Array(9).keys());
         },
         addPlayerChoice: function(e) {
             if (this.choiceCheck == true) return;
-            // if (!this.CheckTie()) this.handleChoice(this.addComputerChoice(), this.computer);
-            else this.handleChoice(e.target.id, this.human);
+            if (typeof this.board[e.target.id] == "number") {
+                this.handleChoice(e.target.id, this.human);
+                if (!this.CheckTie()) this.handleChoice(this.addComputerChoice(), this.computer);
+            }
         },
         addComputerChoice: function() {
+            return this.emptySquares()[0];
         },
         handleChoice: function(eId, player) {
             this.board[eId] = player;
@@ -48,13 +51,23 @@
             for (let [index, win] of this.winConditions.entries()) {
                 if (win.every(elem => plays.indexOf(elem) > -1)) {
                     gameWon = {index: index, player: player};
-                    break;
+                    break; // Checks if player has the WinConditions.
                 }
             }
             return gameWon;
         },
         CheckTie: function() {
-            this.gameend.style.display = "flex";
+            if (this.emptySquares().length == 0) {
+                for (let i = 0; i < this.cells.length; i++) {
+                    this.choiceCheck = true
+                }
+                this.announceWinner("Tie Game!");
+                return true;
+            }
+            return false;
+        },
+        emptySquares: function() {
+            return this.board.filter(s => typeof s == "number")
         },
         gameOver: function(gameWon) {
             for (let index of this.winConditions[gameWon.index]) {
@@ -62,9 +75,11 @@
                 gameWon.player == this.human ? "#75EDBF" : "#ed9175";
                 this.choiceCheck = true;
             }
+            this.announceWinner(gameWon.player == this.human ? "You win!" : "You lose.")
         },
-        announceWinner: function() {
+        announceWinner: function(winner) {
             this.gameend.style.display = "flex";
+            this.gameend.innerHTML = winner;
         },
         restartGame: function() {
             this.board = Array.from(Array(9).keys());
@@ -73,15 +88,12 @@
                 this.cells[i].style.removeProperty("color");
             };
             this.choiceCheck = false;
+            this.gameend.style.display = "none";
         },
     };
     gameBoard.init();
 })();
 
-
-// PLAYERS ARE STORED AS OBJECTS
-
-// OBJECT TO CONTROL THE FLOW OF THE GAME
 
 // RENDER FUNCTION
 
