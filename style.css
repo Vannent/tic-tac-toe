@@ -14,7 +14,7 @@ header {
     height: 5vh;
     padding: 0px;
     margin: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 header .title {
@@ -37,7 +37,6 @@ header .title:hover {
 }
 
 main {
-    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -102,5 +101,6 @@ button:hover {
 }
 
 footer {
+    margin-top: 15px;
     font-weight: 600;
 }
