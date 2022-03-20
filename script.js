@@ -36,7 +36,58 @@
             }
         },
         addComputerChoice: function() {
-            return this.emptySquares()[0];
+            return this.minimax(this.board, this.computer).index;
+        },
+        minimax: function(newBoard, player) {
+            let availableSpots = this.emptySquares(newBoard);
+
+            if (this.checkWin(newBoard, player)) {
+                return {score: -10}
+            } else if (this.checkWin(newBoard, this.computer)) {
+                return {score: 20}
+            } else if (availableSpots.length === 0) {
+                return {score: 0};
+            } // check for terminal states.
+            
+            let moves = [];
+            for (let i = 0; i < availableSpots.length; i++) {
+                let move = {};
+                move.index = newBoard[availableSpots[i]];
+                newBoard[availableSpots[i]] = player; // places ai player into first empty spot.
+
+                if (player === this.computer) {
+                    let result = this.minimax(newBoard, this.human)
+                    move.score = result.score;
+                } else {
+                    let result = this.minimax(newBoard, this.computer)
+                    move.score = result.score;
+                }
+
+                newBoard[availableSpots[i]] = move.index;
+
+                moves.push(move);
+            }
+
+            let bestMove;
+            if (player === this.computer) {
+                let bestScore = -10000;
+                for (let i = 0; i < moves.length; i++) {
+                    if (moves[i].score > bestScore) {
+                        bestScore = moves[i].score;
+                        bestMove = i;
+                    }
+                }
+            } else {
+                let bestScore = 10000;
+                for (let i = 0; i < moves.length; i++) {
+                    if (moves[i].score < bestScore) {
+                        bestScore = moves[i].score;
+                        bestMove = i;
+                    }
+                }
+            }
+
+            return moves[bestMove];
         },
         handleChoice: function(eId, player) {
             this.board[eId] = player;
@@ -93,12 +144,3 @@
     };
     gameBoard.init();
 })();
-
-
-// RENDER FUNCTION
-
-// LET PLAYER ADD MARK TO SPECIFIC SPOT ON THE BOARD
-
-// CHECK FOR 3-IN-A-ROW AND ANNOUNCE WINNER OR TIE
-
-// CREATE COMPUTER AI
