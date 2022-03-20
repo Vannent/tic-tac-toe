@@ -108,7 +108,7 @@
             return gameWon;
         },
         CheckTie: function() {
-            if (this.emptySquares().length == 0) {
+            if (this.emptySquares().length === 0) {
                 for (let i = 0; i < this.cells.length; i++) {
                     this.choiceCheck = true
                 }
