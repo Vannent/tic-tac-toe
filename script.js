@@ -32,7 +32,7 @@
             if (this.choiceCheck == true) return;
             if (typeof this.board[e.target.id] == "number") {
                 this.handleChoice(e.target.id, this.human);
-                if (!this.CheckTie()) this.handleChoice(this.addComputerChoice(), this.computer);
+                if (!this.checkWin(this.board, this.human) && !this.CheckTie()) this.handleChoice(this.addComputerChoice(), this.computer);
             }
         },
         addComputerChoice: function() {
@@ -110,7 +110,7 @@
         CheckTie: function() {
             if (this.emptySquares().length === 0) {
                 for (let i = 0; i < this.cells.length; i++) {
-                    this.choiceCheck = true
+                    this.choiceCheck = true;
                 }
                 this.announceWinner("Tie Game!");
                 return true;
